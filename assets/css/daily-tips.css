@@ -1,0 +1,251 @@
+/* Welbodi na Gentri - Daily health tips page styles */
+
+.daily-hero {
+    padding: var(--space-10) 0;
+    background: linear-gradient(135deg, #1d6a44 0%, #1d8d55 45%, #45a86b 100%);
+    color: var(--color-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.daily-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at top right, rgba(255, 255, 255, 0.14), transparent 22%),
+                      radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 16%);
+    pointer-events: none;
+}
+
+.daily-hero .hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.daily-hero-title {
+    font-size: clamp(2.75rem, 5vw, 4.5rem);
+    font-family: var(--font-heading);
+    margin-bottom: var(--space-4);
+}
+
+.daily-hero-date {
+    font-size: var(--text-base);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.spotlight-card {
+    position: relative;
+    background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-lg);
+    margin-top: calc(var(--space-6) * -1);
+    overflow: hidden;
+}
+
+.spotlight-card::before {
+    content: '❤';
+    position: absolute;
+    top: -1.5rem;
+    right: -1.5rem;
+    font-size: 7rem;
+    color: rgba(245, 166, 35, 0.1);
+    transform: rotate(25deg);
+    pointer-events: none;
+}
+
+.spotlight-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-6);
+    align-items: center;
+}
+
+.spotlight-icon {
+    width: 5rem;
+    height: 5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: rgba(26, 122, 74, 0.15);
+    color: var(--color-primary);
+    font-size: 2rem;
+}
+
+.spotlight-title {
+    margin: 0 0 var(--space-3);
+    font-size: var(--text-3xl);
+    font-family: var(--font-heading);
+    color: var(--color-text);
+}
+
+.spotlight-text {
+    margin: 0 0 var(--space-4);
+    color: rgba(28, 28, 28, 0.88);
+    line-height: 1.85;
+}
+
+.spotlight-meta {
+    display: grid;
+    gap: var(--space-3);
+}
+
+.save-tip-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-full);
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.save-tip-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.tip-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin: var(--space-8) 0 var(--space-5);
+}
+
+.tip-filter {
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid rgba(26, 122, 74, 0.16);
+    border-radius: var(--radius-full);
+    background: var(--color-white);
+    color: var(--color-text);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+}
+
+.tip-filter.active {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+}
+
+.tip-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.tip-card .tip-date {
+    font-size: var(--text-xs);
+    color: rgba(28, 28, 28, 0.6);
+    margin-bottom: var(--space-3);
+}
+
+.tip-card h3 {
+    margin-bottom: var(--space-3);
+    font-size: var(--text-xl);
+    font-family: var(--font-heading);
+}
+
+.tip-card p {
+    margin-bottom: var(--space-4);
+    color: rgba(28, 28, 28, 0.82);
+    line-height: 1.75;
+}
+
+.tip-card .tip-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+.tip-card .tip-category {
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-full);
+    background: rgba(26, 122, 74, 0.12);
+    color: var(--color-primary);
+    font-size: var(--text-sm);
+    font-weight: 700;
+}
+
+.tip-card .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.tip-full {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-base);
+}
+
+.tip-full.open {
+    max-height: 220px;
+}
+
+.tips-archive {
+    margin-top: var(--space-12);
+}
+
+.archive-list {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.archive-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    background: rgba(26, 122, 74, 0.08);
+}
+
+.archive-item strong {
+    display: block;
+    margin-bottom: var(--space-1);
+}
+
+.archive-item time {
+    color: rgba(28, 28, 28, 0.6);
+}
+
+@media (max-width: 992px) {
+    .tips-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .spotlight-inner {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tip-filters {
+        justify-content: center;
+    }
+}

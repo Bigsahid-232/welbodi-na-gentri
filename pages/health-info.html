@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welbodi na Gentri - Health information for malaria, typhoid, hypertension and more.">
+    <title>Welbodi na Gentri - Health Information</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/health-info.css">
+</head>
+<body>
+    <header class="site-header" role="banner">
+        <nav class="navbar" role="navigation" aria-label="Main navigation">
+            <div class="navbar-inner container">
+                <a class="brand" href="../index.html">
+                    <span class="brand-icon" aria-hidden="true">💚</span>
+                    <span class="brand-text">Welbodi na Gentri</span>
+                </a>
+                <button class="menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a class="nav-link" href="../index.html">Home</a></li>
+                    <li><a class="nav-link active" href="health-info.html">Health Info</a></li>
+                    <li><a class="nav-link" href="daily-tips.html">Daily Tips</a></li>
+                    <li><a class="nav-link" href="video-library.html">Video Library</a></li>
+                    <li><a class="nav-link" href="nutrition.html">Nutrition</a></li>
+                    <li><a class="nav-link" href="directory.html">Directory</a></li>
+                    <li class="auth-links">
+                        <a class="nav-link login-link" href="login.html">Login</a>
+                        <a class="btn btn-primary register-link" href="register.html">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="container">
+            <div class="health-header">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span>›</span>
+                    <span>Health Information</span>
+                </nav>
+                <h1 class="health-title">Health Information</h1>
+                <p>Search the most important health conditions in Sierra Leone, with trusted prevention and treatment guidance.</p>
+            </div>
+
+            <div class="health-toolbar">
+                <label class="search-bar" for="condition-search">
+                    <span class="search-icon" aria-hidden="true">🔍</span>
+                    <input id="condition-search" type="search" placeholder="Search for a condition..." aria-label="Search for a condition">
+                </label>
+
+                <div class="filter-tabs" role="tablist" aria-label="Condition filters">
+                    <button class="filter-tab active" data-category="all" type="button">All</button>
+                    <button class="filter-tab" data-category="malaria" type="button">Malaria</button>
+                    <button class="filter-tab" data-category="typhoid" type="button">Typhoid</button>
+                    <button class="filter-tab" data-category="hypertension" type="button">Hypertension</button>
+                    <button class="filter-tab" data-category="nutrition" type="button">Nutrition</button>
+                    <button class="filter-tab" data-category="child-health" type="button">Child Health</button>
+                </div>
+            </div>
+
+            <div class="conditions-grid">
+                <article class="condition-card" data-condition="Malaria" data-category="malaria" data-keywords="mosquito fever chills ants infection" aria-label="Malaria information card">
+                    <div class="condition-header">
+                        <h2 class="condition-title">Malaria</h2>
+                        <span class="condition-badge badge-high">High Risk</span>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-item">
+                            <button class="accordion-trigger" type="button">
+                                Causes
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-panel">
+                                <p>Malaria is caused by Plasmodium parasites transmitted through bites from infected mosquitoes. It spreads quickly in warm, wet environments where mosquitoes breed.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-trigger" type="button">
+                                Symptoms
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-panel">
+                                <p>Common signs include fever, chills, headache, muscle aches, nausea and fatigue. In severe cases, it can cause jaundice, seizures, anemia, and breathing difficulty.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-trigger" type="button">
+                                Prevention
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-panel">
+                                <p>Use insecticide-treated mosquito nets, remove standing water, and apply repellents. Seek early treatment and take prophylactic medicines when traveling to high-risk areas.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-trigger" type="button">
+                                Treatment
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-panel">
+                                <p>Treatment includes ACT (artemisinin-based combination therapy) and medical follow-up. Always consult a qualified health worker early to prevent complications.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="share-row">
+                        <a class="share-action" href="https://wa.me/?text=Check%20out%20this%20Malaria%20information%20on%20Welbodi%20na%20Gentri" target="_blank" rel="noreferrer">WhatsApp</a>
+                        <a class="share-action" href="https://www.facebook.com/sharer/sharer.php?u=https://welbodi-na-gentri.example" target="_blank" rel="noreferrer">Facebook</a>
+                        <button class="share-action copy-link" type="button">Copy link</button>
+                    </div>
+                </article>
+
+                <article class="condition-card" data-condition="Typhoid" data-category="typhoid" data-keywords="typhoid fever bacteria water food" aria-label="Typhoid information card">
+                    <div class="condition-header">
+                        <h2 class="condition-title">Typhoid</h2>
+                        <span class="condition-badge badge-manageable">Manageable</span>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-item">
+                            <button class="accordion-trigger" type="button">
+                                Causes
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-panel">
+                                <p>Typhoid is caused by the Salmonella Typhi bacterium. It spreads through contaminated water and food, especially in areas with poor sanitation.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-trigger" type="button">
+                                Symptoms
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-panel">
+                                <p>Symptoms include high fever, headache, weakness, stomach pain, constipation or diarrhea, and sometimes skin rash. It may develop slowly over several days.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-trigger" type="button">
+                                Prevention
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-panel">
+                                <p>Drink boiled or bottled water, practice hand washing, and eat foods that are fully cooked. Vaccination is also available for travelers and people in high-risk areas.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-trigger" type="button">
+                                Treatment
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-panel">
+                                <p>Typhoid is treated with antibiotics and supportive care. Early diagnosis and proper medicine significantly reduce the risk of complications.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="share-row">
+                        <a class="share-action" href="https://wa.me/?text=Learn%20about%20Typhoid%20on%20Welbodi%20na%20Gentri" target="_blank" rel="noreferrer">WhatsApp</a>
+                        <a class="share-action" href="https://www.facebook.com/sharer/sharer.php?u=https://welbodi-na-gentri.example" target="_blank" rel="noreferrer">Facebook</a>
+                        <button class="share-action copy-link" type="button">Copy link</button>
+                    </div>
+                </article>
+
+                <article class="condition-card" data-condition="Hypertension" data-category="hypertension" data-keywords="blood pressure heart salt stress" aria-label="Hypertension information card">
+                    <div class="condition-header">
+                        <h2 class="condition-title">Hypertension</h2>
+                        <span class="condition-badge badge-manageable">Manageable</span>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-item">
+                            <button class="accordion-trigger" type="button">
+                                Causes
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-panel">
+                                <p>Hypertension is often caused by a combination of factors such as high salt intake, stress, obesity, and lack of exercise. It may also run in families.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-trigger" type="button">
+                                Symptoms
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-panel">
+                                <p>High blood pressure usually has no obvious symptoms. When symptoms appear, they may include headaches, dizziness, or blurred vision.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-trigger" type="button">
+                                Prevention
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-panel">
+                                <p>Reduce salt, eat more fruits and vegetables, exercise regularly, and manage stress. Regular blood pressure checks help catch the condition early.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-trigger" type="button">
+                                Treatment
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-panel">
+                                <p>Treatment may include lifestyle changes and medicines prescribed by a healthcare provider. Routine monitoring and medication adherence are essential.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="share-row">
+                        <a class="share-action" href="https://wa.me/?text=Read%20about%20Hypertension%20on%20Welbodi%20na%20Gentri" target="_blank" rel="noreferrer">WhatsApp</a>
+                        <a class="share-action" href="https://www.facebook.com/sharer/sharer.php?u=https://welbodi-na-gentri.example" target="_blank" rel="noreferrer">Facebook</a>
+                        <button class="share-action copy-link" type="button">Copy link</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/health-info.js"></script>
+</body>
+</html>

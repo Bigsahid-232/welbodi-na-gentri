@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login to Welbodi na Gentri to access your personalized health dashboard, track water intake, save health tips, and manage your wellness journey.">
+    <meta name="keywords" content="login, health dashboard, wellness tracking, water intake, health tips">
+    <meta name="author" content="Welbodi na Gentri">
+    <meta name="robots" content="noindex, nofollow">
+    <meta property="og:title" content="Login - Welbodi na Gentri">
+    <meta property="og:description" content="Access your personalized health dashboard and wellness tracking tools.">
+    <meta property="og:url" content="https://welbodi.sl/pages/login.html">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://welbodi.sl/pages/login.html">
+    <title>Login - Welbodi na Gentri</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+</head>
+<body class="auth-page">
+    <!-- Skip to main content link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <main role="main" id="main-content">
+        <div class="auth-card">
+        <div class="auth-logo">
+            <a class="brand" href="../index.html">
+                <span class="brand-icon" aria-hidden="true">💚</span>
+                <span class="brand-text">Welbodi na Gentri</span>
+            </a>
+        </div>
+
+        <h1>Welcome Back</h1>
+        <p>Login to access your personalized health dashboard.</p>
+
+        <form id="login-form" class="auth-form" novalidate>
+            <div>
+                <label for="login-email">Email Address</label>
+                <input id="login-email" name="email" type="email" required>
+                <div class="field-error" id="login-email-error"></div>
+            </div>
+
+            <div>
+                <label for="login-password">Password</label>
+                <div class="password-field">
+                    <input id="login-password" name="password" type="password" required>
+                    <button type="button" class="password-toggle" data-target="login-password" aria-label="Toggle password visibility">👁️</button>
+                </div>
+                <div class="field-error" id="login-password-error"></div>
+            </div>
+
+            <div class="checkbox-field">
+                <input id="remember" name="remember" type="checkbox">
+                <label for="remember">Remember me</label>
+            </div>
+
+            <button type="submit" class="auth-submit" id="login-submit">Login to My Account</button>
+        </form>
+
+        <div class="auth-links">
+            <p><a href="#" id="forgot-password">Forgot Password?</a></p>
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="forgot-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close" aria-label="Close modal">×</button>
+            <h2>Reset Your Password</h2>
+            <p>Enter your email address and we'll send you a reset link.</p>
+            <form id="reset-form">
+                <label for="reset-email">Email Address</label>
+                <input id="reset-email" name="email" type="email" required>
+                <button type="submit" class="auth-submit">Send Reset Link</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast" role="alert"></div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+</body>
+</html>

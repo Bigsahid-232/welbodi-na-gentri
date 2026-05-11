@@ -1,0 +1,184 @@
+/* Welbodi na Gentri - Local remedies page styles */
+
+.remedies-page {
+    background-color: #f7efe1;
+    color: var(--color-text);
+    min-height: 100vh;
+}
+
+.remedies-banner {
+    background: #f0e5cd;
+    border-left: 4px solid var(--color-primary);
+    padding: var(--space-5) var(--space-6);
+    margin-bottom: var(--space-6);
+    border-radius: var(--radius-lg);
+}
+
+.remedies-banner p {
+    margin: 0;
+    font-weight: 700;
+}
+
+.remedies-header {
+    margin-bottom: var(--space-6);
+}
+
+.condition-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+}
+
+.condition-filter button {
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(26,122,74,0.14);
+    background: var(--color-white);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.condition-filter button.active,
+.condition-filter button:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+.remedies-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+}
+
+.remedy-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(28,28,28,0.08);
+}
+
+.remedy-card h3 {
+    margin-top: 0;
+    font-family: var(--font-heading);
+    margin-bottom: var(--space-3);
+}
+
+.remedy-badge {
+    display: inline-flex;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-full);
+    background: rgba(26,122,74,0.14);
+    color: var(--color-primary);
+    font-weight: 700;
+    margin-bottom: var(--space-4);
+}
+
+.remedy-section {
+    margin-bottom: var(--space-5);
+}
+
+.remedy-section h4 {
+    margin-bottom: var(--space-3);
+    font-size: var(--text-lg);
+}
+
+.checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+}
+
+.checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    line-height: 1.8;
+}
+
+.checklist li::before {
+    content: '✓';
+    color: var(--color-primary);
+    min-width: 1.25rem;
+}
+
+.remedy-steps {
+    padding-left: var(--space-4);
+}
+
+.remedy-steps li {
+    margin-bottom: var(--space-3);
+    list-style: decimal;
+}
+
+.safety-box {
+    background: #fff4c1;
+    border-left: 4px solid #f5a623;
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+}
+
+.submit-section {
+    margin-top: var(--space-12);
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-sm);
+}
+
+.submit-section h2 {
+    margin-top: 0;
+}
+
+.submit-form {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.submit-form input,
+.submit-form textarea {
+    width: 100%;
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(28,28,28,0.12);
+    resize: vertical;
+}
+
+.submit-button {
+    padding: var(--space-4) var(--space-6);
+    border-radius: var(--radius-full);
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    width: fit-content;
+}
+
+.thank-you-message {
+    display: none;
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    background: rgba(26,122,74,0.12);
+    color: var(--color-text);
+    margin-top: var(--space-4);
+}
+
+@media (max-width: 992px) {
+    .remedies-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .health-toolbar,
+    .condition-filter,
+    .submit-form {
+        grid-template-columns: 1fr;
+    }
+}

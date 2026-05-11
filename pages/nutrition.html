@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welbodi na Gentri - Nutrition guidance with local foods, diet advice, and BMI tools.">
+    <title>Welbodi na Gentri - Nutrition Guide</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/nutrition.css">
+</head>
+<body>
+    <header class="site-header" role="banner">
+        <nav class="navbar" role="navigation" aria-label="Main navigation">
+            <div class="navbar-inner container">
+                <a class="brand" href="../index.html">
+                    <span class="brand-icon" aria-hidden="true">💚</span>
+                    <span class="brand-text">Welbodi na Gentri</span>
+                </a>
+                <button class="menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a class="nav-link" href="../index.html">Home</a></li>
+                    <li><a class="nav-link" href="health-info.html">Health Info</a></li>
+                    <li><a class="nav-link" href="daily-tips.html">Daily Tips</a></li>
+                    <li><a class="nav-link" href="video-library.html">Video Library</a></li>
+                    <li><a class="nav-link active" href="nutrition.html">Nutrition</a></li>
+                    <li><a class="nav-link" href="directory.html">Directory</a></li>
+                    <li class="auth-links">
+                        <a class="nav-link login-link" href="login.html">Login</a>
+                        <a class="btn btn-primary register-link" href="register.html">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="container nutrition-hero">
+            <p class="hero-eyebrow">Nutrition Guide</p>
+            <h1>Healthy eating with local ingredients and simple daily habits.</h1>
+            <p>Learn how to build balanced meals, support common conditions, and check your BMI with trusted local food choices.</p>
+        </section>
+
+        <section class="container">
+            <div class="eat-well-plate" aria-label="Balanced plate diagram">
+                <div class="plate-slice slice-proteins"><span class="slice-label">Proteins</span></div>
+                <div class="plate-slice slice-carbs"><span class="slice-label">Carbs</span></div>
+                <div class="plate-slice slice-vegetables"><span class="slice-label">Vegetables</span></div>
+                <div class="plate-slice slice-fruits"><span class="slice-label">Fruits</span></div>
+                <div class="plate-slice slice-fats"><span class="slice-label">Fats</span></div>
+            </div>
+
+            <div class="diet-filters" role="tablist" aria-label="Nutrition categories">
+                <button class="diet-btn active" type="button" data-target="all">All</button>
+                <button class="diet-btn" type="button" data-target="heart">Heart</button>
+                <button class="diet-btn" type="button" data-target="energy">Energy</button>
+                <button class="diet-btn" type="button" data-target="digestion">Digestion</button>
+                <button class="diet-btn" type="button" data-target="child">Child Growth</button>
+            </div>
+
+            <div class="condition-cards">
+                <article class="condition-card diet-card" data-diet="heart">
+                    <h3>Heart health support</h3>
+                    <ul class="food-list">
+                        <li>Leafy greens, sweet potato, lean fish</li>
+                        <li>Tomatoes, okra, groundnuts</li>
+                        <li>Low-salt stews and boiled tubers</li>
+                    </ul>
+                </article>
+                <article class="condition-card diet-card" data-diet="energy">
+                    <h3>Stronger energy for everyday life</h3>
+                    <ul class="food-list">
+                        <li>Rice or cassava with beans and vegetables</li>
+                        <li>Fresh fruits like banana and pawpaw</li>
+                        <li>Protein from fish, eggs, or groundnuts</li>
+                    </ul>
+                </article>
+                <article class="condition-card diet-card" data-diet="digestion">
+                    <h3>Healthy digestion</h3>
+                    <ul class="food-list">
+                        <li>Warm ginger tea, cooked greens, and millet porridge</li>
+                        <li>Fresh fruits and clean water</li>
+                        <li>Light meals after heavy activity</li>
+                    </ul>
+                </article>
+                <article class="condition-card diet-card" data-diet="child">
+                    <h3>Stronger child growth</h3>
+                    <ul class="food-list">
+                        <li>Milk, eggs, beans, and greens</li>
+                        <li>Small, frequent balanced meals</li>
+                        <li>Fruits, fresh water, and gentle play</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="container local-foods" aria-labelledby="local-foods-title">
+            <h2 id="local-foods-title">Local foods to include</h2>
+            <div class="food-scroll">
+                <article class="food-card">
+                    <span aria-hidden="true">🥬</span>
+                    <h3>Leafy greens</h3>
+                    <p>Rich in vitamins and minerals for strong bodies and better immunity.</p>
+                </article>
+                <article class="food-card">
+                    <span aria-hidden="true">🌾</span>
+                    <h3>Rice & cassava</h3>
+                    <p>Energy-rich staples that pair well with vegetables and protein.</p>
+                </article>
+                <article class="food-card">
+                    <span aria-hidden="true">🐟</span>
+                    <h3>Fish & eggs</h3>
+                    <p>Quality protein to support growth, muscles, and recovery.</p>
+                </article>
+                <article class="food-card">
+                    <span aria-hidden="true">🍌</span>
+                    <h3>Fresh fruits</h3>
+                    <p>Natural vitamins and hydration for healthy digestion and energy.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="container bmi-section">
+            <article class="bmi-card" aria-labelledby="bmi-form-title">
+                <h2 id="bmi-form-title">BMI checker</h2>
+                <p>Use your height and weight to estimate your body mass index and get simple advice.</p>
+                <form id="bmi-form">
+                    <label>
+                        Height (cm)
+                        <input type="number" name="height" min="30" max="250" required placeholder="e.g. 165">
+                    </label>
+                    <label>
+                        Weight (kg)
+                        <input type="number" name="weight" min="10" max="200" required placeholder="e.g. 60">
+                    </label>
+                    <button type="submit">Calculate BMI</button>
+                </form>
+            </article>
+            <article class="bmi-card bmi-result" id="bmi-result-card" aria-live="polite">
+                <strong id="bmi-result">Enter values to see your BMI</strong>
+                <p id="bmi-advice">Your result and advice will appear here after calculation.</p>
+            </article>
+        </section>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/nutrition.js"></script>
+</body>
+</html>

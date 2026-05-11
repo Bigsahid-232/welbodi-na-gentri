@@ -1,0 +1,233 @@
+/* Welbodi na Gentri - Nutrition guide page styles */
+
+.nutrition-hero {
+    padding: var(--space-10) 0;
+}
+
+.nutrition-hero h1 {
+    font-size: clamp(2.75rem, 5vw, 4rem);
+    margin-bottom: var(--space-4);
+    font-family: var(--font-heading);
+}
+
+.nutrition-hero p {
+    max-width: 760px;
+    line-height: 1.8;
+    color: rgba(28,28,28,0.9);
+}
+
+.eat-well-plate {
+    position: relative;
+    margin: var(--space-12) auto;
+    width: min(540px, 100%);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.eat-well-plate::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.18), transparent 56%);
+}
+
+.plate-slice {
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(50% 50%, 100% 0%, 100% 100%);
+    transform-origin: center;
+    display: grid;
+    place-items: end center;
+    padding-bottom: 4rem;
+}
+
+.slice-proteins { background: #e7f5e9; transform: rotate(0deg); }
+.slice-carbs { background: #f7f2df; transform: rotate(72deg); }
+.slice-vegetables { background: #d4e8dd; transform: rotate(144deg); }
+.slice-fruits { background: #faecd2; transform: rotate(216deg); }
+.slice-fats { background: #dfece9; transform: rotate(288deg); }
+
+.slice-label {
+    transform: rotate(-36deg);
+    font-weight: 700;
+    color: var(--color-text);
+    text-align: center;
+    width: 8rem;
+}
+
+.condition-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-12);
+}
+
+.condition-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+}
+
+.condition-card h3 {
+    margin-top: 0;
+    font-family: var(--font-heading);
+}
+
+.food-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+}
+
+.food-list li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.food-list li::before {
+    content: '•';
+    color: var(--color-primary);
+}
+
+.meal-plan {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.meal-plan-item {
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    background: rgba(26,122,74,0.08);
+}
+
+.local-foods {
+    margin: var(--space-12) 0;
+}
+
+.local-foods h2 {
+    margin-bottom: var(--space-5);
+}
+
+.food-scroll {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(220px, 1fr);
+    gap: var(--space-4);
+    overflow-x: auto;
+    padding-bottom: var(--space-3);
+}
+
+.food-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    min-width: 220px;
+    box-shadow: var(--shadow-sm);
+}
+
+.food-card span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-full);
+    background: rgba(26,122,74,0.12);
+    margin-bottom: var(--space-4);
+    font-size: 1.5rem;
+}
+
+.food-card h3 {
+    margin: 0 0 var(--space-3);
+    font-size: var(--text-lg);
+}
+
+.food-card p {
+    margin: 0;
+    line-height: 1.75;
+    color: rgba(28,28,28,0.8);
+}
+
+.bmi-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+    margin-bottom: var(--space-12);
+}
+
+.bmi-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+}
+
+.bmi-card input,
+.bmi-card select {
+    width: 100%;
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(28,28,28,0.12);
+    margin-bottom: var(--space-4);
+}
+
+.bmi-card button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4) var(--space-6);
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.bmi-result {
+    margin-top: var(--space-6);
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    background: rgba(26,122,74,0.08);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+.bmi-result.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.bmi-result strong {
+    display: block;
+    margin-bottom: var(--space-2);
+}
+
+.bmi-status {
+    font-weight: 700;
+}
+
+.status-normal { color: #1A7A4A; }
+.status-underweight { color: #C47F1C; }
+.status-overweight { color: #D94F3D; }
+.status-obese { color: #A4191F; }
+
+@media (max-width: 992px) {
+    .condition-cards,
+    .bmi-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .food-scroll {
+        grid-auto-columns: minmax(180px, 1fr);
+    }
+}

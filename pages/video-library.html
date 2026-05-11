@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welbodi na Gentri - Video library with practical health education and wellness guides.">
+    <title>Welbodi na Gentri - Video Library</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/video-library.css">
+</head>
+<body>
+    <header class="site-header" role="banner">
+        <nav class="navbar" role="navigation" aria-label="Main navigation">
+            <div class="navbar-inner container">
+                <a class="brand" href="../index.html">
+                    <span class="brand-icon" aria-hidden="true">💚</span>
+                    <span class="brand-text">Welbodi na Gentri</span>
+                </a>
+                <button class="menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a class="nav-link" href="../index.html">Home</a></li>
+                    <li><a class="nav-link" href="health-info.html">Health Info</a></li>
+                    <li><a class="nav-link" href="daily-tips.html">Daily Tips</a></li>
+                    <li><a class="nav-link active" href="video-library.html">Video Library</a></li>
+                    <li><a class="nav-link" href="nutrition.html">Nutrition</a></li>
+                    <li><a class="nav-link" href="directory.html">Directory</a></li>
+                    <li class="auth-links">
+                        <a class="nav-link login-link" href="login.html">Login</a>
+                        <a class="btn btn-primary register-link" href="register.html">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="video-hero">
+            <div class="container hero-copy">
+                <p class="hero-eyebrow">Video Library</p>
+                <h1>Practical health videos for your family and community.</h1>
+                <p>Browse short, easy-to-understand videos on nutrition, hygiene, child care, and everyday wellness.</p>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="video-toolbar">
+                <label class="video-search" for="video-search">
+                    <span class="search-icon" aria-hidden="true">🔍</span>
+                    <input id="video-search" type="search" placeholder="Search videos by topic" aria-label="Search videos by topic">
+                </label>
+                <div class="video-tabs" role="tablist" aria-label="Video categories">
+                    <button class="video-tab active" type="button">All</button>
+                    <button class="video-tab" type="button">Malaria</button>
+                    <button class="video-tab" type="button">Nutrition</button>
+                    <button class="video-tab" type="button">Exercise</button>
+                    <button class="video-tab" type="button">Hygiene</button>
+                    <button class="video-tab" type="button">Child Health</button>
+                    <button class="video-tab" type="button">Mental Health</button>
+                </div>
+            </div>
+
+            <div class="video-grid" aria-live="polite" aria-label="Video search results"></div>
+        </section>
+
+        <div class="video-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+            <div class="video-modal">
+                <div class="video-modal-header">
+                    <h2 id="modal-title">Watch video</h2>
+                    <button class="modal-close" type="button" aria-label="Close video player">×</button>
+                </div>
+                <div class="video-modal-body">
+                    <iframe id="video-embed" title="Video player" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/video-library.js"></script>
+</body>
+</html>
