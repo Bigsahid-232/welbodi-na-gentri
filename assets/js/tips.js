@@ -21,7 +21,7 @@
         { id: 15, date: '2026-05-15', category: 'Exercise', icon: '🚶', title: 'Walk with a friend', shortText: 'Exercise is easier when you walk together.', fullText: 'A walking partner encourages consistency and turns movement into a social habit. Aim for a daily walk with family or neighbours.' }
     ];
 
-    const LOCAL_STORAGE_KEY = 'welbodiSavedTips';
+    const LOCAL_STORAGE_KEY = 'welbodi_saved_tips';
 
     function getDayOfYear(date) {
         const start = new Date(date.getFullYear(), 0, 0);

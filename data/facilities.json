@@ -1,0 +1,251 @@
+{
+  "facilities": [
+    {
+      "id": "hospital_001",
+      "name": "Choithram Memorial Hospital",
+      "type": "Hospital",
+      "address": "Hill Station, Freetown",
+      "district": "Western Area Urban",
+      "phone": "+232 76 980000",
+      "email": "info@choithram.sl",
+      "website": "www.choithram.sl",
+      "gps": {
+        "latitude": 8.4808,
+        "longitude": -13.2264
+      },
+      "hours": "24/7 Emergency | Mon-Fri: 8AM-6PM, Sat-Sun: 10AM-4PM",
+      "services": ["Emergency Room", "In-patient Care", "Surgery", "Pediatrics", "Maternity", "Cardiology", "Orthopedics"],
+      "rating": 4.6,
+      "reviews": 124,
+      "verified": true
+    },
+    {
+      "id": "hospital_002",
+      "name": "Life Care Hospital",
+      "type": "Hospital",
+      "address": "198 Wilkinson Road, Freetown",
+      "district": "Western Area Urban",
+      "phone": "+232 80 220220",
+      "email": "contact@lifecare.sl",
+      "website": "www.lifecarehospital.sl",
+      "gps": {
+        "latitude": 8.4950,
+        "longitude": -13.2150
+      },
+      "hours": "24/7 Emergency | Mon-Fri: 7AM-7PM, Sat-Sun: 9AM-5PM",
+      "services": ["Emergency Room", "ICU", "Surgery", "Nephrology", "Dialysis", "Cardiology", "Neurology"],
+      "rating": 4.5,
+      "reviews": 89,
+      "verified": true
+    },
+    {
+      "id": "hospital_003",
+      "name": "Shuman Hospital",
+      "type": "Hospital",
+      "address": "15-17 Pultney Street, Freetown",
+      "district": "Western Area Urban",
+      "phone": "+232 30 111222",
+      "email": "info@shumanhospital.sl",
+      "website": "www.shumanhospital.sl",
+      "gps": {
+        "latitude": 8.4850,
+        "longitude": -13.2350
+      },
+      "hours": "24/7 Emergency | Mon-Fri: 8AM-6PM, Sat-Sun: 10AM-4PM",
+      "services": ["Emergency Room", "General Medicine", "Surgery", "Pediatrics", "Obstetrics", "Radiology"],
+      "rating": 4.3,
+      "reviews": 67,
+      "verified": true
+    },
+    {
+      "id": "hospital_004",
+      "name": "Connaught Hospital",
+      "type": "Hospital",
+      "address": "Freetown Central",
+      "district": "Western Area Urban",
+      "phone": "+232 76 111111",
+      "email": "admin@connaught.sl",
+      "website": "www.connaught-hospital.sl",
+      "gps": {
+        "latitude": 8.4750,
+        "longitude": -13.2410
+      },
+      "hours": "24/7 Emergency | Outpatient: 8AM-4PM daily",
+      "services": ["Emergency Room", "General Surgery", "Internal Medicine", "Pediatrics", "Lab Services"],
+      "rating": 4.1,
+      "reviews": 156,
+      "verified": true
+    },
+    {
+      "id": "clinic_001",
+      "name": "Sierra Leone Red Crescent Clinic",
+      "type": "Clinic",
+      "address": "Regent Road, Freetown",
+      "district": "Western Area Urban",
+      "phone": "+232 76 555333",
+      "email": "clinic@redcrescent.sl",
+      "website": "www.redcrescentsl.org",
+      "gps": {
+        "latitude": 8.4900,
+        "longitude": -13.2300
+      },
+      "hours": "Mon-Fri: 8AM-5PM | Sat: 9AM-1PM",
+      "services": ["General Consultation", "Health Education", "First Aid", "Blood Bank"],
+      "rating": 4.4,
+      "reviews": 94,
+      "verified": true
+    },
+    {
+      "id": "clinic_002",
+      "name": "Brookfields Health Center",
+      "type": "Clinic",
+      "address": "Brookfields, Freetown",
+      "district": "Western Area Urban",
+      "phone": "+232 78 444555",
+      "email": "contact@brookfields.sl",
+      "website": "www.brookfieldshc.sl",
+      "gps": {
+        "latitude": 8.5050,
+        "longitude": -13.2100
+      },
+      "hours": "Mon-Fri: 8AM-4PM | Sat: 9AM-12PM",
+      "services": ["General Practice", "Vaccination", "Maternal Health", "Child Health", "Counseling"],
+      "rating": 4.2,
+      "reviews": 73,
+      "verified": true
+    },
+    {
+      "id": "clinic_003",
+      "name": "Lumley Health Center",
+      "type": "Clinic",
+      "address": "Lumley Beach, Freetown",
+      "district": "Western Area Urban",
+      "phone": "+232 76 666777",
+      "email": "info@lumleyhc.sl",
+      "website": "www.lumleyhc.sl",
+      "gps": {
+        "latitude": 8.4650,
+        "longitude": -13.2500
+      },
+      "hours": "Daily: 8AM-5PM",
+      "services": ["General Consultation", "Preventive Care", "Minor Surgery", "STI Testing", "Health Screening"],
+      "rating": 4.3,
+      "reviews": 56,
+      "verified": true
+    },
+    {
+      "id": "pharmacy_001",
+      "name": "CITIGLOBE Pharmacies Ltd",
+      "type": "Pharmacy",
+      "address": "6 Campbell Street, Freetown",
+      "district": "Western Area Urban",
+      "phone": "+232 76 504925",
+      "email": "orders@citiglobe.sl",
+      "website": "www.citiglobe.sl",
+      "gps": {
+        "latitude": 8.4920,
+        "longitude": -13.2380
+      },
+      "hours": "Mon-Fri: 8AM-6PM | Sat: 9AM-2PM | Sun: 10AM-1PM",
+      "services": ["Prescription Filling", "OTC Medications", "Medicine Delivery", "Consultation", "Health Screening"],
+      "rating": 4.7,
+      "reviews": 234,
+      "verified": true
+    },
+    {
+      "id": "pharmacy_002",
+      "name": "Biogen Pharma",
+      "type": "Pharmacy",
+      "address": "20 Garrison Street, Freetown",
+      "district": "Western Area Urban",
+      "phone": "+232 76 011616",
+      "email": "support@biogenpharma.sl",
+      "website": "www.biogenpharma.sl",
+      "gps": {
+        "latitude": 8.4880,
+        "longitude": -13.2420
+      },
+      "hours": "Mon-Sat: 8AM-8PM | Sun: 10AM-4PM",
+      "services": ["Prescription Filling", "Generic Alternatives", "Health Products", "Delivery Service", "Medication Advice"],
+      "rating": 4.6,
+      "reviews": 178,
+      "verified": true
+    },
+    {
+      "id": "pharmacy_003",
+      "name": "Apollo One Pharmacy",
+      "type": "Pharmacy",
+      "address": "1 Murray Town Road, Freetown",
+      "district": "Western Area Urban",
+      "phone": "+232 74 332833",
+      "email": "hello@apollone.sl",
+      "website": "www.apollone-pharmacy.sl",
+      "gps": {
+        "latitude": 8.5100,
+        "longitude": -13.2050
+      },
+      "hours": "Daily: 7AM-9PM",
+      "services": ["24-Hour Delivery", "Prescription Filling", "Wellness Products", "Phone Consultations"],
+      "rating": 4.8,
+      "reviews": 312,
+      "verified": true
+    },
+    {
+      "id": "pharmacy_004",
+      "name": "Payless Pharmacy",
+      "type": "Pharmacy",
+      "address": "190G Wilkinson Road, Freetown",
+      "district": "Western Area Urban",
+      "phone": "+232 73 822525",
+      "email": "info@paylesspharm.sl",
+      "website": "www.paylesspharmacy.sl",
+      "gps": {
+        "latitude": 8.4950,
+        "longitude": -13.2200
+      },
+      "hours": "Mon-Fri: 8AM-7PM | Sat-Sun: 9AM-5PM",
+      "services": ["Discount Programs", "Generic Drugs", "OTC Medicines", "Health Screening"],
+      "rating": 4.4,
+      "reviews": 145,
+      "verified": true
+    },
+    {
+      "id": "pharmacy_005",
+      "name": "City Pharmacy",
+      "type": "Pharmacy",
+      "address": "18 Wilberforce Street, Freetown",
+      "district": "Western Area Urban",
+      "phone": "+232 76 608351",
+      "email": "contact@citypharm.sl",
+      "website": "www.citypharmacy.sl",
+      "gps": {
+        "latitude": 8.4800,
+        "longitude": -13.2450
+      },
+      "hours": "Mon-Fri: 8AM-6PM | Sat: 9AM-2PM",
+      "services": ["Prescription Filling", "Medication Review", "Compounding", "Counseling"],
+      "rating": 4.5,
+      "reviews": 98,
+      "verified": true
+    },
+    {
+      "id": "pharmacy_006",
+      "name": "Alafia Drug Store",
+      "type": "Pharmacy",
+      "address": "Koidu, Kono District",
+      "district": "Kono",
+      "phone": "+232 33 554473",
+      "email": "info@alafiads.sl",
+      "website": "www.alafiadrugs.sl",
+      "gps": {
+        "latitude": 8.4500,
+        "longitude": -10.8700
+      },
+      "hours": "Mon-Fri: 8AM-5PM | Sat: 9AM-1PM",
+      "services": ["Prescription Filling", "OTC Medicines", "Health Products", "Community Health Programs"],
+      "rating": 4.2,
+      "reviews": 67,
+      "verified": true
+    }
+  ]
+}

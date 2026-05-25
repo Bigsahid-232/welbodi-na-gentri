@@ -3,119 +3,7 @@
 (function() {
     'use strict';
 
-    const facilities = [
-        {
-            id: 'f1',
-            name: 'Connaught Hospital',
-            type: 'hospital',
-            district: 'western-area',
-            address: 'Tower Hill, Freetown, Sierra Leone',
-            phone: '+232 22 228 596',
-            hours: 'Mon-Fri 8am-5pm, Sat 8am-12pm',
-            lat: 8.4844,
-            lng: -13.2319
-        },
-        {
-            id: 'f2',
-            name: 'Princess Christian Maternity Hospital',
-            type: 'hospital',
-            district: 'western-area',
-            address: 'Juba, Freetown, Sierra Leone',
-            phone: '+232 22 229 001',
-            hours: '24/7',
-            lat: 8.4799,
-            lng: -13.2367
-        },
-        {
-            id: 'f3',
-            name: 'Rokupa Hospital',
-            type: 'hospital',
-            district: 'bo',
-            address: 'Bo Town, Bo District, Sierra Leone',
-            phone: '+232 32 222 222',
-            hours: 'Mon-Fri 8am-5pm, Sat 8am-12pm',
-            lat: 7.9621,
-            lng: -11.7409
-        },
-        {
-            id: 'f4',
-            name: 'Kenema Government Hospital',
-            type: 'hospital',
-            district: 'kenema',
-            address: 'Kenema Town, Kenema District, Sierra Leone',
-            phone: '+232 33 999 999',
-            hours: 'Mon-Fri 8am-5pm, Sat 8am-12pm',
-            lat: 7.8769,
-            lng: -11.1906
-        },
-        {
-            id: 'f5',
-            name: 'Makeni Government Hospital',
-            type: 'hospital',
-            district: 'makeni',
-            address: 'Makeni Town, Bombali District, Sierra Leone',
-            phone: '+232 52 222 222',
-            hours: 'Mon-Fri 8am-5pm, Sat 8am-12pm',
-            lat: 8.8861,
-            lng: -12.0442
-        },
-        {
-            id: 'f6',
-            name: 'Koidu Government Hospital',
-            type: 'hospital',
-            district: 'kono',
-            address: 'Koidu Town, Kono District, Sierra Leone',
-            phone: '+232 72 222 222',
-            hours: 'Mon-Fri 8am-5pm, Sat 8am-12pm',
-            lat: 8.6439,
-            lng: -10.9714
-        },
-        {
-            id: 'f7',
-            name: 'Central Medical Store Pharmacy',
-            type: 'pharmacy',
-            district: 'western-area',
-            address: 'Siaka Stevens Street, Freetown, Sierra Leone',
-            phone: '+232 22 228 500',
-            hours: 'Mon-Fri 8am-6pm, Sat 8am-2pm',
-            lat: 8.4844,
-            lng: -13.2319
-        },
-        {
-            id: 'f8',
-            name: 'Bo District Health Clinic',
-            type: 'clinic',
-            district: 'bo',
-            address: 'Bo Town Center, Bo District, Sierra Leone',
-            phone: '+232 32 222 333',
-            hours: 'Mon-Fri 8am-4pm',
-            lat: 7.9621,
-            lng: -11.7409
-        },
-        {
-            id: 'f9',
-            name: 'Kenema Community Clinic',
-            type: 'clinic',
-            district: 'kenema',
-            address: 'Kenema Central, Kenema District, Sierra Leone',
-            phone: '+232 33 999 888',
-            hours: 'Mon-Fri 8am-4pm, Sat 8am-12pm',
-            lat: 7.8769,
-            lng: -11.1906
-        },
-        {
-            id: 'f10',
-            name: 'Partners In Health NGO Center',
-            type: 'ngo',
-            district: 'makeni',
-            address: 'Makeni Rural Area, Bombali District, Sierra Leone',
-            phone: '+232 52 333 444',
-            hours: 'Mon-Fri 9am-5pm',
-            lat: 8.8861,
-            lng: -12.0442
-        }
-    ];
-
+    let allFacilities = [];
     const searchInput = document.getElementById('facility-search');
     const typeFilter = document.getElementById('type-filter');
     const districtFilter = document.getElementById('district-filter');
@@ -125,29 +13,46 @@
     const thankYou = document.getElementById('thank-you-message');
     const STORAGE_KEY = 'welbodiFacilitySubmissions';
 
+    // Load facilities from JSON
+    async function loadFacilities() {
+        try {
+            const response = await fetch('../data/facilities.json');
+            if (!response.ok) throw new Error('Failed to load facilities');
+            const data = await response.json();
+            allFacilities = data.facilities || [];
+            renderFacilities(allFacilities);
+            return allFacilities;
+        } catch (error) {
+            console.error('Error loading facilities:', error);
+            showToast('Failed to load facility data. Please refresh the page.', 'error');
+            return [];
+        }
+    }
+
     function isOpenNow(hours) {
-        if (hours === '24/7') return true;
+        if (hours === '24/7' || !hours) return true;
         const now = new Date();
         const day = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
         const currentTime = now.getHours() * 60 + now.getMinutes();
 
-        // Simple parsing for "Mon-Fri 8am-5pm, Sat 8am-12pm"
-        const parts = hours.split(', ');
+        // Parse various hour formats
+        const parts = hours.split('|').map(p => p.trim());
         let todayHours = null;
 
         for (const part of parts) {
+            if (part.includes('24/7')) return true;
             if (part.includes('Mon-Fri') && day >= 1 && day <= 5) {
-                todayHours = part.replace('Mon-Fri ', '');
+                todayHours = part.replace(/Mon-Fri:\s*/i, '').trim();
             } else if (part.includes('Sat') && day === 6) {
-                todayHours = part.replace('Sat ', '');
+                todayHours = part.replace(/Sat\s*:\s*/i, '').trim();
             } else if (part.includes('Sun') && day === 0) {
-                todayHours = part.replace('Sun ', '');
+                todayHours = part.replace(/Sun\s*:\s*/i, '').trim();
             }
         }
 
         if (!todayHours) return false;
 
-        const [start, end] = todayHours.split('-');
+        const [start, end] = todayHours.split('-').map(t => t.trim());
         const startTime = parseTime(start);
         const endTime = parseTime(end);
 
@@ -155,42 +60,76 @@
     }
 
     function parseTime(timeStr) {
-        const [time, period] = timeStr.split(/(am|pm)/i);
-        let [hours, minutes] = time.split(':').map(Number);
-        if (period.toLowerCase() === 'pm' && hours !== 12) hours += 12;
-        if (period.toLowerCase() === 'am' && hours === 12) hours = 0;
-        return hours * 60 + (minutes || 0);
+        const match = timeStr.match(/(\d{1,2}):?(\d{0,2})?\s*(am|pm)?/i);
+        if (!match) return 0;
+
+        let hours = parseInt(match[1], 10);
+        const minutes = parseInt(match[2] || 0, 10);
+        const period = match[3] ? match[3].toLowerCase() : '';
+
+        if (period === 'pm' && hours !== 12) hours += 12;
+        if (period === 'am' && hours === 12) hours = 0;
+
+        return hours * 60 + minutes;
     }
 
     function renderFacilities(filteredFacilities) {
         if (!directoryGrid) return;
+        
+        if (filteredFacilities.length === 0) {
+            directoryGrid.innerHTML = '<div class="no-results"><p>No facilities found matching your search criteria.</p></div>';
+            updateResultsCount(0);
+            return;
+        }
+
         directoryGrid.innerHTML = filteredFacilities.map((facility) => {
             const isOpen = isOpenNow(facility.hours);
             const statusClass = isOpen ? 'open' : 'closed';
             const statusText = isOpen ? 'Open Now' : 'Closed';
-            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(facility.address)}`;
+            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(facility.address + ', ' + facility.district)}`;
+            const rating = facility.rating ? `⭐ ${facility.rating}/5 (${facility.reviews} reviews)` : '';
 
             return `
-                <article class="directory-card" data-id="${facility.id}">
-                    <h3>${facility.name}</h3>
-                    <span class="facility-type ${facility.type}">${facility.type.charAt(0).toUpperCase() + facility.type.slice(1)}</span>
-                    <div class="facility-address">
-                        <strong>${facility.district.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}</strong><br>
-                        ${facility.address}
+                <article class="directory-card facility-${facility.type.toLowerCase()}" data-id="${facility.id}">
+                    <div class="card-header">
+                        <h3>${facility.name}</h3>
+                        <span class="facility-type type-${facility.type.toLowerCase()}">${facility.type}</span>
                     </div>
-                    <div class="facility-phone">
-                        <span>📞</span>
-                        <a href="tel:${facility.phone}">${facility.phone}</a>
+                    ${rating ? `<div class="facility-rating">${rating}</div>` : ''}
+                    <div class="facility-info">
+                        <div class="facility-location">
+                            <strong>📍 Location:</strong><br>
+                            ${facility.address}<br>
+                            <span class="facility-district">${facility.district}</span>
+                        </div>
+                        <div class="facility-phone">
+                            <strong>📞 Phone:</strong><br>
+                            <a href="tel:${facility.phone}">${facility.phone}</a>
+                        </div>
+                        ${facility.email ? `
+                        <div class="facility-email">
+                            <strong>✉️ Email:</strong><br>
+                            <a href="mailto:${facility.email}">${facility.email}</a>
+                        </div>` : ''}
+                        <div class="facility-hours">
+                            <strong>🕐 Hours:</strong><br>
+                            ${facility.hours}
+                        </div>
                     </div>
-                    <div class="facility-hours">
-                        <strong>Hours:</strong> ${facility.hours}
-                    </div>
+                    ${facility.services && facility.services.length > 0 ? `
+                    <div class="facility-services">
+                        <strong>Services:</strong>
+                        <ul>
+                            ${facility.services.slice(0, 4).map(service => `<li>${service}</li>`).join('')}
+                        </ul>
+                    </div>` : ''}
                     <div class="facility-status ${statusClass}">
-                        <span>●</span>
-                        ${statusText}
+                        <span class="status-indicator">●</span>
+                        <span>${statusText}</span>
                     </div>
                     <div class="facility-actions">
                         <a class="btn btn-primary" href="${mapsUrl}" target="_blank" rel="noopener">Get Directions</a>
+                        ${facility.website ? `<a class="btn btn-outline" href="${facility.website}" target="_blank" rel="noopener">Visit Website</a>` : ''}
                     </div>
                 </article>
             `;
@@ -210,12 +149,13 @@
         const type = typeFilter ? typeFilter.value : 'all';
         const district = districtFilter ? districtFilter.value : 'all';
 
-        const filtered = facilities.filter((facility) => {
+        const filtered = allFacilities.filter((facility) => {
             const matchesQuery = query === '' ||
                 facility.name.toLowerCase().includes(query) ||
                 facility.address.toLowerCase().includes(query) ||
+                facility.district.toLowerCase().includes(query) ||
                 facility.type.toLowerCase().includes(query);
-            const matchesType = type === 'all' || facility.type === type;
+            const matchesType = type === 'all' || facility.type.toLowerCase() === type.toLowerCase();
             const matchesDistrict = district === 'all' || facility.district === district;
             return matchesQuery && matchesType && matchesDistrict;
         });
@@ -251,13 +191,38 @@
             date: new Date().toISOString()
         };
         saveSubmission(submission);
-        thankYou.style.display = 'block';
-        thankYou.textContent = 'Thank you! Your facility suggestion has been saved for review.';
+        showToast('Thank you! Your facility suggestion has been saved for review.', 'success');
         facilityForm.reset();
     }
 
+    function showToast(message, type = 'info') {
+        const toastContainer = document.querySelector('.toast-container') || createToastContainer();
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `
+            <span class="toast-icon">${type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ'}</span>
+            <div class="toast-content">
+                <div class="toast-message">${message}</div>
+            </div>
+        `;
+        toastContainer.appendChild(toast);
+        setTimeout(() => toast.classList.add('show'), 10);
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    function createToastContainer() {
+        const container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+        return container;
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-        renderFacilities(facilities);
+        // Load facilities from JSON
+        loadFacilities();
 
         if (searchInput) {
             searchInput.addEventListener('input', filterFacilities);

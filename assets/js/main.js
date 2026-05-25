@@ -86,6 +86,7 @@
         initializeAnimations();
         initializePageTransitions();
         initializeTooltips();
+        initializeButtonLoading();
     });
 
     // Toast notification system
@@ -195,37 +196,47 @@
     function initializeButtonLoading() {
         document.addEventListener('click', (e) => {
             const button = e.target.closest('button[type="submit"], .btn[type="submit"]');
-            if (!button) return;
+            if (!button || button.classList.contains('no-loading')) return;
 
             button.classList.add('loading');
             button.disabled = true;
+            const originalText = button.textContent;
 
-            // Simulate async operation
             setTimeout(() => {
                 button.classList.remove('loading');
                 button.disabled = false;
+                button.textContent = originalText;
             }, 1500);
         });
     }
 
-    // Page transitions
+    // Page transitions with better control
     function initializePageTransitions() {
         const mainContent = document.querySelector('main');
         if (!mainContent) return;
 
-        // Fade in on page load
         mainContent.classList.add('fade-in', 'animate');
 
-        // Fade out on navigation
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a[href]');
-            if (!link || link.getAttribute('href').startsWith('#') || link.getAttribute('href').startsWith('javascript:')) return;
+            if (!link) return;
+
+            const href = link.getAttribute('href');
+            if (href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:')) return;
+
+            const isExternal = link.target === '_blank' || link.rel.includes('external');
+            if (isExternal) return;
 
             e.preventDefault();
             mainContent.classList.add('page-transition', 'fade-out');
 
             setTimeout(() => {
-                window.location.href = link.href;
+                try {
+                    window.location.href = link.href;
+                } catch (error) {
+                    console.error('Navigation error:', error);
+                    mainContent.classList.remove('page-transition', 'fade-out');
+                }
             }, 200);
         });
     }
@@ -422,135 +433,11 @@
         const loadingOverlay = document.getElementById('loading-overlay');
         if (!loadingOverlay) return;
 
-        // Hide after a brief delay to show loading state
         setTimeout(() => {
             loadingOverlay.classList.add('hidden');
-            // Remove from DOM after animation
             setTimeout(() => {
                 loadingOverlay.style.display = 'none';
             }, 300);
         }, 500);
-    }
-
-    function checkLoginStatus() {
-        const user = localStorage.getItem('welbodi_user');
-        return user ? JSON.parse(user) : null;
-    }
-
-    function updateNavigation(isLoggedIn) {
-        const authLinks = document.getElementById('auth-links');
-        const loggedInLinks = document.getElementById('logged-in-links');
-
-        if (isLoggedIn) {
-            if (authLinks) authLinks.style.display = 'none';
-            if (loggedInLinks) loggedInLinks.style.display = 'block';
-        } else {
-            if (authLinks) authLinks.style.display = 'block';
-            if (loggedInLinks) loggedInLinks.style.display = 'none';
-        }
-    }
-
-    function showDashboard() {
-        const dashboard = document.getElementById('user-dashboard');
-        const hero = document.getElementById('hero-section');
-
-        if (dashboard) dashboard.style.display = 'block';
-        if (hero) hero.style.display = 'none';
-    }
-
-    function showHero() {
-        const dashboard = document.getElementById('user-dashboard');
-        const hero = document.getElementById('hero-section');
-
-        if (dashboard) dashboard.style.display = 'none';
-        if (hero) hero.style.display = 'block';
-    }
-
-    function loadDashboardData() {
-        const user = checkLoginStatus();
-        if (!user) return;
-
-        // Update user name
-        const userNameElement = document.getElementById('user-name');
-        if (userNameElement) {
-            userNameElement.textContent = user.name || user.email.split('@')[0];
-        }
-
-        // Update date
-        const dateElement = document.getElementById('dashboard-date');
-        if (dateElement) {
-            const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            dateElement.textContent = now.toLocaleDateString('en-US', options);
-        }
-
-        // Load random quote
-        const quoteElement = document.getElementById('dashboard-quote');
-        if (quoteElement) {
-            const quotes = [
-                "Health is not valued till sickness comes. - Thomas Fuller",
-                "Take care of your body. It's the only place you have to live. - Jim Rohn",
-                "The greatest wealth is health. - Virgil",
-                "Prevention is better than cure. - Desiderius Erasmus",
-                "A healthy outside starts from the inside. - Robert Urich"
-            ];
-            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-            quoteElement.textContent = randomQuote;
-        }
-
-        // Load saved tips count
-        const savedTipsCount = document.getElementById('saved-tips-count');
-        if (savedTipsCount) {
-            const savedTips = JSON.parse(localStorage.getItem('welbodi_saved_tips') || '[]');
-            savedTipsCount.textContent = savedTips.length;
-        }
-    }
-
-    function setupWaterTracker() {
-        const waterGlasses = document.querySelectorAll('.water-glass');
-        const waterCount = document.getElementById('water-count');
-
-        if (!waterGlasses.length || !waterCount) return;
-
-        // Load current water intake
-        const today = new Date().toDateString();
-        const waterData = JSON.parse(localStorage.getItem('welbodi_water') || '{}');
-        const currentIntake = waterData[today] || 0;
-
-        // Update UI
-        updateWaterDisplay(currentIntake);
-
-        // Setup click handlers
-        waterGlasses.forEach((glass, index) => {
-            glass.addEventListener('click', () => {
-                const newIntake = index + 1;
-                waterData[today] = newIntake;
-                localStorage.setItem('welbodi_water', JSON.stringify(waterData));
-                updateWaterDisplay(newIntake);
-            });
-        });
-
-        function updateWaterDisplay(intake) {
-            waterGlasses.forEach((glass, index) => {
-                if (index < intake) {
-                    glass.textContent = '🥛'; // Filled glass
-                    glass.classList.add('filled');
-                } else {
-                    glass.textContent = '🥤'; // Empty glass
-                    glass.classList.remove('filled');
-                }
-            });
-            waterCount.textContent = `You've had ${intake} of 8 glasses today`;
-        }
-    }
-
-    function setupLogout() {
-        const logoutBtn = document.getElementById('logout-btn');
-        if (!logoutBtn) return;
-
-        logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('welbodi_user');
-            location.reload();
-        });
     }
 })();

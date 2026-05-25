@@ -4,7 +4,7 @@
     'use strict';
 
     const USERS_KEY = 'welbodiUsers';
-    const CURRENT_USER_KEY = 'welbodiCurrentUser';
+    const CURRENT_USER_KEY = 'welbodi_user';
 
     function showToast(message, type = 'success') {
         const toast = document.getElementById('toast');
@@ -149,7 +149,7 @@
 
         // Create user
         const user = {
-            name: formData.get('name'),
+            name: formData.get('full-name'),
             email: email,
             phone: formData.get('phone'),
             district: formData.get('district'),

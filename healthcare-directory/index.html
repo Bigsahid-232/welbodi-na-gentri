@@ -2,669 +2,317 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-        <link rel=\"canonical\" href=\"https://welbodi.sl/healthcare-directory/\">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <meta name="description" content="Healthcare directory for Welbodi na Gentri - Find hospitals, clinics, and pharmacies across Sierra Leone.">
-    <meta name="keywords" content="healthcare, hospitals, clinics, pharmacies, Sierra Leone, medical services">
-    <title>Healthcare Directory - Welbodi na Gentri</title>
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="canonical" href="https://welbodi.sl/healthcare-directory/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find verified hospitals, clinics, and pharmacies across Sierra Leone with real-time location data, contact information, and ratings on Welbodi na Gentri.">
+    <meta name="keywords" content="healthcare directory, hospitals, clinics, pharmacies, Sierra Leone, medical services, geolocation, verified facilities">
+    <meta name="author" content="Welbodi na Gentri">
+    <meta property="og:title" content="Healthcare Directory - Welbodi na Gentri">
+    <meta property="og:description" content="Verified healthcare facilities across Sierra Leone">
+    <meta property="og:type" content="website">
+    <title>Healthcare Directory - Verified Hospitals, Clinics & Pharmacies | Welbodi na Gentri</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/directory.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <style>
+        .directory-card {
+            border: 1px solid var(--color-border-light);
+        }
+        .directory-card:hover {
+            border-color: var(--color-primary);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--space-4);
+            margin-bottom: var(--space-4);
+            border-bottom: 1px solid var(--color-border-light);
+            padding-bottom: var(--space-4);
+        }
+        .card-header h3 {
+            margin: 0;
+            flex: 1;
+        }
+        .facility-type {
+            display: inline-block;
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius-full);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .facility-type.Hospital {
+            background-color: rgba(26, 122, 74, 0.1);
+            color: var(--color-primary);
+        }
+        .facility-type.Clinic {
+            background-color: rgba(245, 166, 35, 0.1);
+            color: var(--color-secondary);
+        }
+        .facility-type.Pharmacy {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--color-success);
+        }
+        .facility-info {
+            display: grid;
+            gap: var(--space-4);
+            margin: var(--space-4) 0;
+        }
+        .facility-location, .facility-phone, .facility-email, .facility-hours {
+            padding: var(--space-3);
+            background-color: var(--color-background-alt);
+            border-radius: var(--radius-md);
+            font-size: var(--text-sm);
+        }
+        .facility-location strong, .facility-phone strong, .facility-email strong, .facility-hours strong {
+            display: block;
+            margin-bottom: var(--space-2);
+            color: var(--color-primary);
+        }
+        .facility-district {
+            display: inline-block;
+            margin-top: var(--space-2);
+            padding: var(--space-1) var(--space-3);
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: var(--radius-sm);
+            font-size: var(--text-xs);
+            font-weight: 600;
+        }
+        .facility-phone a, .facility-email a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-word;
+        }
+        .facility-phone a:hover, .facility-email a:hover {
+            text-decoration: underline;
+        }
+        .facility-rating {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-3);
+            background-color: rgba(245, 166, 35, 0.08);
+            border-radius: var(--radius-md);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: #D88B1D;
+            margin-bottom: var(--space-4);
+        }
+        .facility-services {
+            padding: var(--space-4);
+            background-color: var(--color-background-alt);
+            border-radius: var(--radius-md);
+            margin: var(--space-4) 0;
+        }
+        .facility-services strong {
+            display: block;
+            margin-bottom: var(--space-3);
+            color: var(--color-primary);
+        }
+        .facility-services ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-2);
+            list-style: none;
+        }
+        .facility-services li {
+            padding: var(--space-2);
+            color: var(--color-text);
+            font-size: var(--text-sm);
+        }
+        .facility-services li::before {
+            content: "✓ ";
+            color: var(--color-success);
+            font-weight: 700;
+            margin-right: var(--space-2);
+        }
+        .facility-status {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-3);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: var(--text-sm);
+            margin: var(--space-4) 0;
+        }
+        .facility-status.open {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--color-success);
+        }
+        .facility-status.closed {
+            background-color: rgba(217, 79, 61, 0.1);
+            color: var(--color-danger);
+        }
+        .status-indicator {
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .facility-actions {
+            display: flex;
+            gap: var(--space-3);
+            margin-top: var(--space-4);
+            flex-wrap: wrap;
+        }
+        .facility-actions .btn {
+            flex: 1;
+            min-width: 140px;
+        }
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: var(--space-10);
+            background-color: var(--color-background-alt);
+            border-radius: var(--radius-lg);
+        }
+        .no-results p {
+            color: var(--color-text);
+            font-size: var(--text-lg);
+        }
+        #results-count {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+    </style>
 </head>
 <body>
-        <a href=\"#main-content\" class=\"skip-link\">Skip to main content</a>
-<!-- Header and Navigation -->
-    <header role="banner">
-        <nav role="navigation" aria-label="Main navigation">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header and Navigation -->
+    <header class="site-header" role="banner">
+        <nav role="navigation" aria-label="Main navigation" class="navbar">
             <div class="navbar-container">
                 <div class="logo">
                     <h1>Welbodi na Gentri</h1>
-                    <p class="tagline">Your Health, Our Priority</p>
+                    <p class="tagline">Health for All</p>
                 </div>
-                <ul class="nav-menu">
-                    <li><a href="../index.html" data-en="Home" data-kr="Ome">Home</a></li>
-                    <li><a href="../about.html">About</a></li>
-                    <li><a href="../health-information/index.html" data-en="Health Info" data-kr="Health Infomashin">Health Info</a></li>
-                    <li><a href="index.html" data-en="Directory" data-kr="Helth Senta List">Directory</a></li>
-                    <li><a href="../login.html" data-en="Login" data-kr="Enta">Login</a></li>
-                    <li><a href="../register.html" data-en="Register" data-kr="Rej">Register</a></li>
-                        <li class="language-switch"><button class="language-toggle" id="language-toggle" type="button" aria-label="Switch language">EN | KR</button></li>
-                    </ul>
-                <button class="menu-toggle" aria-label="Toggle navigation menu">
+                <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
+                <ul class="nav-menu" role="menubar">
+                    <li role="none"><a href="../index.html" data-en="Home" data-kr="Ome" role="menuitem">Home</a></li>
+                    <li role="none"><a href="../pages/health-info.html" data-en="Health Info" data-kr="Health Infomashin" role="menuitem">Health Info</a></li>
+                    <li role="none"><a href="index.html" data-en="Directory" data-kr="Helth Senta List" class="active" role="menuitem">Directory</a></li>
+                    <li role="none"><a href="../pages/video-library.html" data-en="Videos" data-kr="Vidio" role="menuitem">Videos</a></li>
+                    <li role="none"><a href="../login.html" data-en="Login" data-kr="Enta" role="menuitem">Login</a></li>
+                    <li role="none" class="language-switch"><button class="language-toggle" id="language-toggle" type="button" aria-label="Switch language">EN | KR</button></li>
+                </ul>
             </div>
         </nav>
     </header>
 
     <!-- Main Content -->
-    <main role="main">
+    <main id="main-content" role="main">
         <!-- Page Header -->
-        <section class="page-header" aria-labelledby="page-title">
+        <section class="page-header section" aria-labelledby="page-title">
             <div class="container">
                 <h1 id="page-title">Healthcare Directory</h1>
-                <p class="page-subtitle">Find trusted hospitals, clinics, and pharmacies across Sierra Leone</p>
+                <p class="page-subtitle">Find verified hospitals, clinics, and pharmacies near you across Sierra Leone</p>
             </div>
         </section>
 
         <!-- Search and Filter Section -->
-        <section class="directory-filters" aria-label="Directory search and filters">
+        <section class="directory-filters section" aria-label="Directory search and filters">
             <div class="container">
                 <div class="filter-container">
                     <div class="search-box">
                         <input 
                             type="search" 
-                            id="search-facilities" 
-                            placeholder="Search by facility name or location..." 
+                            id="facility-search" 
+                            placeholder="Search by facility name, location, or service..." 
                             aria-label="Search healthcare facilities"
                         >
                     </div>
-                    <div class="filter-buttons">
-                        <button class="filter-btn active" data-filter="all">All</button>
-                        <button class="filter-btn" data-filter="hospital">Hospitals</button>
-                        <button class="filter-btn" data-filter="clinic">Clinics</button>
-                        <button class="filter-btn" data-filter="pharmacy">Pharmacies</button>
+                    <div class="filter-controls">
+                        <div class="filter-group">
+                            <label for="type-filter" class="filter-label">Facility Type:</label>
+                            <select id="type-filter" aria-label="Filter by facility type">
+                                <option value="all">All Types</option>
+                                <option value="Hospital">Hospitals</option>
+                                <option value="Clinic">Clinics</option>
+                                <option value="Pharmacy">Pharmacies</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="district-filter" class="filter-label">District:</label>
+                            <select id="district-filter" aria-label="Filter by district">
+                                <option value="all">All Districts</option>
+                                <option value="Western Area Urban">Western Area Urban</option>
+                                <option value="Kono">Kono</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <p class="results-info" id="results-count" aria-live="polite">Loading facilities...</p>
+            </div>
+        </section>
+
+        <!-- Facilities Grid -->
+        <section class="directory-section section" aria-labelledby="facilities-title">
+            <div class="container">
+                <h2 id="facilities-title" class="sr-only">Healthcare Facilities</h2>
+                <div class="directory-grid" id="directory-grid" role="list">
+                    <!-- Facilities will be loaded here dynamically -->
+                    <div style="grid-column: 1/-1; text-align: center; padding: var(--space-10);">
+                        <p>Loading healthcare facilities...</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Hospitals Section -->
-        <section class="directory-section" id="hospitals-section" aria-labelledby="hospitals-title">
+        <!-- Suggest a Facility Section -->
+        <section class="suggest-facility section" style="background-color: var(--color-background-alt);" aria-labelledby="suggest-title">
             <div class="container">
-                <h2 id="hospitals-title">Hospitals</h2>
-                <p class="section-subtitle">Major medical facilities providing comprehensive healthcare services</p>
-                
-                <div class="facilities-grid">
-                    <!-- Hospital 1: Connaught Hospital -->
-                    <article class="facility-card" data-type="hospital">
-                        <div class="facility-header">
-                            <h3>Connaught Hospital</h3>
-                            <span class="facility-type">Hospital</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Freetown, Western Area</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23276111111">(+232) 76 111 111</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">24/7 Emergency Services | General & Specialized Care</p>
-                        </div>
-                    </article>
-
-                    <!-- Hospital 2: Sierra Leone Hospital -->
-                    <article class="facility-card" data-type="hospital">
-                        <div class="facility-header">
-                            <h3>Sierra Leone Hospital</h3>
-                            <span class="facility-type">Hospital</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Kingtom, Freetown</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23276222222">(+232) 76 222 222</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">Emergency Services | Maternity & Pediatrics</p>
-                        </div>
-                    </article>
-
-                    <!-- Hospital 3: Choithram Memorial Hospital -->
-                    <article class="facility-card" data-type="hospital">
-                        <div class="facility-header">
-                            <h3>Choithram Memorial Hospital</h3>
-                            <span class="facility-type">Hospital</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Bo, Southern Province</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23276333333">(+232) 76 333 333</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">General Hospital | Surgery & Internal Medicine</p>
-                        </div>
-                    </article>
-
-                    <!-- Hospital 4: Kenema Government Hospital -->
-                    <article class="facility-card" data-type="hospital">
-                        <div class="facility-header">
-                            <h3>Kenema Government Hospital</h3>
-                            <span class="facility-type">Hospital</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Kenema, Eastern Province</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23276444444">(+232) 76 444 444</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">Government Hospital | Infectious Diseases</p>
-                        </div>
-                    </article>
-
-                    <!-- Hospital 5: Makeni Regional Hospital -->
-                    <article class="facility-card" data-type="hospital">
-                        <div class="facility-header">
-                            <h3>Makeni Regional Hospital</h3>
-                            <span class="facility-type">Hospital</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Makeni, Northern Province</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23276555555">(+232) 76 555 555</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">Regional Hospital | Emergency & General Care</p>
-                        </div>
-                    </article>
-
-                    <!-- Hospital 6: Port Loko Hospital -->
-                    <article class="facility-card" data-type="hospital">
-                        <div class="facility-header">
-                            <h3>Port Loko Government Hospital</h3>
-                            <span class="facility-type">Hospital</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Port Loko, Northern Province</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23276666666">(+232) 76 666 666</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">General Hospital | Maternal & Child Health</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Clinics Section -->
-        <section class="directory-section" id="clinics-section" aria-labelledby="clinics-title">
-            <div class="container">
-                <h2 id="clinics-title">Health Clinics</h2>
-                <p class="section-subtitle">Primary healthcare centers and outpatient clinics</p>
-                
-                <div class="facilities-grid">
-                    <!-- Clinic 1: Freetown Central Clinic -->
-                    <article class="facility-card" data-type="clinic">
-                        <div class="facility-header">
-                            <h3>Freetown Central Health Clinic</h3>
-                            <span class="facility-type">Clinic</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Downtown Freetown</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23276777777">(+232) 76 777 777</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">General Practice | Health Education</p>
-                        </div>
-                    </article>
-
-                    <!-- Clinic 2: Bo Urban Clinic -->
-                    <article class="facility-card" data-type="clinic">
-                        <div class="facility-header">
-                            <h3>Bo Urban Health Clinic</h3>
-                            <span class="facility-type">Clinic</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Bo City, Southern Province</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23276888888">(+232) 76 888 888</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">Primary Healthcare | Vaccination Services</p>
-                        </div>
-                    </article>
-
-                    <!-- Clinic 3: Koidu Medical Clinic -->
-                    <article class="facility-card" data-type="clinic">
-                        <div class="facility-header">
-                            <h3>Koidu Medical Clinic</h3>
-                            <span class="facility-type">Clinic</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Koidu City, Eastern Province</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23276999999">(+232) 76 999 999</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">Community Health | Outpatient Services</p>
-                        </div>
-                    </article>
-
-                    <!-- Clinic 4: Kailahun Primary Clinic -->
-                    <article class="facility-card" data-type="clinic">
-                        <div class="facility-header">
-                            <h3>Kailahun Primary Health Clinic</h3>
-                            <span class="facility-type">Clinic</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Kailahun, Eastern Province</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23275111111">(+232) 75 111 111</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">Primary Care | Maternal Health</p>
-                        </div>
-                    </article>
-
-                    <!-- Clinic 5: Tonkolili Health Center -->
-                    <article class="facility-card" data-type="clinic">
-                        <div class="facility-header">
-                            <h3>Tonkolili Health Center</h3>
-                            <span class="facility-type">Clinic</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Tonkolili, Northern Province</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23275222222">(+232) 75 222 222</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">Community Health | Child Immunization</p>
-                        </div>
-                    </article>
-
-                    <!-- Clinic 6: Port Loko Urban Clinic -->
-                    <article class="facility-card" data-type="clinic">
-                        <div class="facility-header">
-                            <h3>Port Loko Urban Health Clinic</h3>
-                            <span class="facility-type">Clinic</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Port Loko City</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23275333333">(+232) 75 333 333</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">General Clinic | Family Planning</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Pharmacies Section -->
-        <section class="directory-section" id="pharmacies-section" aria-labelledby="pharmacies-title">
-            <div class="container">
-                <h2 id="pharmacies-title">Pharmacies</h2>
-                <p class="section-subtitle">Registered pharmacies and medication dispensaries</p>
-                
-                <div class="facilities-grid">
-                    <!-- Pharmacy 1: National Pharmacy -->
-                    <article class="facility-card" data-type="pharmacy">
-                        <div class="facility-header">
-                            <h3>National Pharmacy Store</h3>
-                            <span class="facility-type">Pharmacy</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Freetown, Main Street</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23275444444">(+232) 75 444 444</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">Prescription & Over-the-Counter | Delivery Available</p>
-                        </div>
-                    </article>
-
-                    <!-- Pharmacy 2: Health Plus Pharmacy -->
-                    <article class="facility-card" data-type="pharmacy">
-                        <div class="facility-header">
-                            <h3>Health Plus Pharmacy</h3>
-                            <span class="facility-type">Pharmacy</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Bo City, Southern Province</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23275555555">(+232) 75 555 555</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">Generic & Brand Medicines | Consultation Available</p>
-                        </div>
-                    </article>
-
-                    <!-- Pharmacy 3: Kenema Community Pharmacy -->
-                    <article class="facility-card" data-type="pharmacy">
-                        <div class="facility-header">
-                            <h3>Kenema Community Pharmacy</h3>
-                            <span class="facility-type">Pharmacy</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Kenema, Eastern Province</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23275666666">(+232) 75 666 666</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">Local & International Medicines | Affordable Pricing</p>
-                        </div>
-                    </article>
-
-                    <!-- Pharmacy 4: Makeni Central Pharmacy -->
-                    <article class="facility-card" data-type="pharmacy">
-                        <div class="facility-header">
-                            <h3>Makeni Central Pharmacy</h3>
-                            <span class="facility-type">Pharmacy</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Makeni, Northern Province</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23275777777">(+232) 75 777 777</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">Prescription Services | Health Products</p>
-                        </div>
-                    </article>
-
-                    <!-- Pharmacy 5: Cape Mount Pharmacy -->
-                    <article class="facility-card" data-type="pharmacy">
-                        <div class="facility-header">
-                            <h3>Cape Mount Pharmacy</h3>
-                            <span class="facility-type">Pharmacy</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Cape Mount, Northern Province</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23275888888">(+232) 75 888 888</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">Standard Medicines | Community Care</p>
-                        </div>
-                    </article>
-
-                    <!-- Pharmacy 6: Freetown Express Pharmacy -->
-                    <article class="facility-card" data-type="pharmacy">
-                        <div class="facility-header">
-                            <h3>Freetown Express Pharmacy</h3>
-                            <span class="facility-type">Pharmacy</span>
-                        </div>
-                        <div class="facility-details">
-                            <div class="detail-item">
-                                <span class="detail-icon">📍</span>
-                                <div>
-                                    <p class="detail-label">Location</p>
-                                    <p class="detail-value">Freetown, Lumley Area</p>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-icon">📞</span>
-                                <div>
-                                    <p class="detail-label">Phone</p>
-                                    <a href="tel:+23275999999">(+232) 75 999 999</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="facility-footer">
-                            <p class="facility-info">Fast Service | Delivery Within City</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Emergency Services Section -->
-        <section class="emergency-section" aria-labelledby="emergency-title">
-            <div class="container">
-                <h2 id="emergency-title">Emergency Services</h2>
-                <p class="emergency-subtitle">In case of medical emergency, call immediately</p>
-                <div class="emergency-numbers">
-                    <div class="emergency-card">
-                        <div class="emergency-icon">🚑</div>
-                        <h3>National Ambulance Service</h3>
-                        <a href="tel:+23276000000" class="emergency-number">(+232) 76 000 000</a>
+                <h2 id="suggest-title">Know of a Healthcare Facility?</h2>
+                <p>Help us keep our directory up-to-date by suggesting a healthcare facility</p>
+                <form id="facility-form" class="suggestion-form" novalidate>
+                    <div class="form-group">
+                        <label for="suggest-name">Facility Name</label>
+                        <input type="text" id="suggest-name" name="name" required aria-label="Facility name">
                     </div>
-                    <div class="emergency-card">
-                        <div class="emergency-icon">⚠️</div>
-                        <h3>Emergency Police</h3>
-                        <a href="tel:999" class="emergency-number">999</a>
+                    <div class="form-group">
+                        <label for="suggest-type">Type</label>
+                        <select id="suggest-type" name="type" required aria-label="Facility type">
+                            <option value="">Select type</option>
+                            <option value="Hospital">Hospital</option>
+                            <option value="Clinic">Clinic</option>
+                            <option value="Pharmacy">Pharmacy</option>
+                        </select>
                     </div>
-                    <div class="emergency-card">
-                        <div class="emergency-icon">🏥</div>
-                        <h3>Connaught Hospital Emergency</h3>
-                        <a href="tel:+23276111111" class="emergency-number">(+232) 76 111 111</a>
+                    <div class="form-group">
+                        <label for="suggest-address">Address</label>
+                        <input type="text" id="suggest-address" name="address" required aria-label="Facility address">
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="suggest-phone">Phone Number</label>
+                        <input type="tel" id="suggest-phone" name="phone" required aria-label="Facility phone">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Suggest Facility</button>
+                </form>
+                <div id="thank-you-message" style="display: none;"></div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer role="contentinfo">
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>About Welbodi na Gentri</h4>
-                    <p>Committed to providing accessible, reliable health information to improve public health outcomes in Sierra Leone.</p>
-                </div>
-
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="../index.html" data-en="Home" data-kr="Ome">Home</a></li>
-                        <li><a href="../about.html">About Us</a></li>
-                        <li><a href="../health-information/index.html">Health Information</a></li>
-                        <li><a href="index.html">Healthcare Directory</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h4>Health Topics</h4>
-                    <ul>
-                        <li><a href="../pages/nutrition.html" data-en="Nutrition" data-kr="Nutrition">Nutrition</a></li>
-                        <li><a href="../pages/exercise.html">Exercise</a></li>
-                        <li><a href="../pages/local-remedies.html">Local Remedies</a></li>
-                        <li><a href="../pages/daily-tips.html" data-en="Daily Tips" data-kr="Evride Helth Tip">Daily Tips</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h4>Contact & Support</h4>
-                    <ul>
-                        <li><a href="mailto:info@welbodi.sl">Email: info@welbodi.sl</a></li>
-                        <li><a href="tel:+23276000000">Phone: +232 76 000 000</a></li>
-                        <li><a href="#">Emergency Services</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2026 Welbodi na Gentri. All rights reserved.</p>
-                <p class="disclaimer">This website provides health information for educational purposes. Always consult with qualified healthcare professionals for medical advice.</p>
-                <ul class="legal-links">
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Accessibility</a></li>
-                </ul>
-            </div>
+    <footer role="contentinfo" style="background-color: var(--color-primary); color: white; padding: var(--space-8) 0; margin-top: var(--space-14); text-align: center;">
+        <div class="container">
+            <p>&copy; 2024 Welbodi na Gentri. Your trusted digital health companion.</p>
+            <p style="margin-top: var(--space-4); font-size: var(--text-sm);">For emergencies, call 999 or visit the nearest hospital.</p>
         </div>
     </footer>
 
-    <!-- External JavaScript -->
-    <script src="../js/main.js" defer></script>
-    <script src="../js/directory.js" defer></script>
+    <script src="../assets/js/directory.js"></script>
 </body>
 </html>
