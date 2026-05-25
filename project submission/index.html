@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welbodi na Gentri - Sierra Leone Health Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="emergency-banner">
+        <span class="alert-pulse"></span>
+        <span class="translatable" data-en="Emergency? Call Toll-Free:" data-kr="Emergency? Call Toll-Free:">Emergency? Call Toll-Free:</span>
+        <a href="tel:117">117</a>
+    </div>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-symbol">SL</div>
+                <div class="logo-text">
+                    <h1>Welbodi na Gentri</h1>
+                    <p>Health Information Hub</p>
+                </div>
+            </a>
+
+            <button class="menu-toggle" id="menuBtn" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="mission.html" class="nav-link">Mission</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="lang-bar">
+            <button class="lang-btn" id="langBtn" onclick="toggleLanguage()">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 0c2.5 0 4.5 4.5 4.5 10S14.5 22 12 22 7.5 17.5 7.5 12 9.5 2 12 2zm-10 10h20"></path></svg>
+                <span>Read na Krio</span>
+            </button>
+        </div>
+
+        <section class="hero">
+            <h2 class="translatable" data-en="Your Health, Your Wealth" data-kr="Yu Welbodi na Yu Gentri">Your Health, Your Wealth</h2>
+            <p class="translatable" data-en="Reliable, local health insights custom-tailored for Sierra Leonean families." data-kr="Klin health info wey go foh help ol we pipul dem na Salone.">Reliable, local health insights custom-tailored for Sierra Leonean families.</p>
+        </section>
+
+        <div class="grid-layout">
+            <div class="card">
+                <div class="card-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 21a9 9 0 0 1 0-18v18zM12 3a9 9 0 1 1 0 18V3zM12 8v8M8 12h8"></path></svg>
+                </div>
+                <h3><span class="translatable" data-en="Free Health Care Initiative" data-kr="Fri Tritment">Free Health Care Initiative</span></h3>
+                <p class="translatable" data-en="Completely free clinical treatment is provided under government programs for pregnant women, breastfeeding mothers, and children under the age of 5 across public clinics." data-kr="Tritment na fri foh belo-uman, mama we de bres-fid, en pikin dem we no rich 5 yias na government clinic dem.">Completely free clinical treatment is provided under government programs for pregnant women, breastfeeding mothers, and children under the age of 5 across public clinics.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <h3><span class="translatable" data-en="Malaria Intervention" data-kr="Malaria Protection">Malaria Intervention</span></h3>
+                <p class="translatable" data-en="Malaria is fully preventable. Sleep under treated bed nets nightly, keep surrounding water from pooling, and head directly to a clinic for a checkup if fever starts." data-kr="Malaria na sick wey we kin stop. Slip ondane net, keep doti wata foh pull, en go clinic wantem if yu get fiva.">Malaria is fully preventable. Sleep under treated bed nets nightly, keep surrounding water from pooling, and head directly to a clinic for a checkup if fever starts.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </div>
+                <h3><span class="translatable" data-en="Clean Hygiene & Sanitation" data-kr="Bodi en Wata Klin">Clean Hygiene & Sanitation</span></h3>
+                <p class="translatable" data-en="Prevent stomach sickness and cholera. Use running water and hand soap consistently, and purify drinking water with local chlorine treatments or boiling methods." data-kr="Avoid kolera. Use running wata en sop foh wash an, and treat or boil yu drink-wata to keep am safe.">Prevent stomach sickness and cholera. Use running water and hand soap consistently, and purify drinking water with local chlorine treatments or boiling methods.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p><strong>Welbodi na Gentri</strong> • Sierra Leone</p>
+        <p style="margin-top: 5px;" class="translatable" data-en="Keep our communities healthy and safe." data-kr="Keep we community safe en get gud health.">Keep our communities healthy and safe.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('show');
+        }
+
+        function applyLanguage(lang) {
+            const elements = document.querySelectorAll('.translatable');
+            const langBtnSpan = document.querySelector('#langBtn span');
+
+            elements.forEach(el => {
+                if (lang === 'kr' && el.dataset.kr) {
+                    el.textContent = el.dataset.kr;
+                } else if (lang === 'en' && el.dataset.en) {
+                    el.textContent = el.dataset.en;
+                }
+            });
+
+            if (langBtnSpan) {
+                langBtnSpan.textContent = (lang === 'en') ? 'Read na Krio' : 'Read na English';
+            }
+        }
+
+        function toggleLanguage() {
+            let currentLang = localStorage.getItem('welbodi_lang') || 'en';
+            let nextLang = (currentLang === 'en') ? 'kr' : 'en';
+            localStorage.setItem('welbodi_lang', nextLang);
+            applyLanguage(nextLang);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('welbodi_lang') || 'en';
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>

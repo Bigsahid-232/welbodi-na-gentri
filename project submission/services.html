@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Welbodi na Gentri</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="emergency-banner">
+        <span class="alert-pulse"></span>
+        <span class="translatable" data-en="Emergency? Call Toll-Free:" data-kr="Emergency? Call Toll-Free:">Emergency? Call Toll-Free:</span>
+        <a href="tel:117">117</a>
+    </div>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-symbol">SL</div>
+                <div class="logo-text">
+                    <h1>Welbodi na Gentri</h1>
+                    <p>Health Information Hub</p>
+                </div>
+            </a>
+
+            <button class="menu-toggle" id="menuBtn" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="services.html" class="nav-link active">Services</a></li>
+                    <li><a href="mission.html" class="nav-link">Mission</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="lang-bar">
+            <button class="lang-btn" id="langBtn" onclick="toggleLanguage()">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 0c2.5 0 4.5 4.5 4.5 10S14.5 22 12 22 7.5 17.5 7.5 12 9.5 2 12 2zm-10 10h20"></path></svg>
+                <span>Read na Krio</span>
+            </button>
+        </div>
+
+        <section class="text-content">
+            <h2 class="translatable" data-en="Local Support Directories" data-kr="We Servis Dem">Local Support Directories</h2>
+            <p class="translatable" data-en="This informational portal is built to map out critical paths to national public healthcare offerings across our communities." data-kr="Dis website de show yu easy ways foh load up en contact local health centers na we contry.">This informational portal is built to map out critical paths to national public healthcare offerings across our communities.</p>
+
+            <h3>
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8zM12 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"></path></svg>
+                <span class="translatable" data-en="Health Post Directory Access" data-kr="Ospitul Finder">Health Post Directory Access</span>
+            </h3>
+            <p class="translatable" data-en="Information showing citizens the locations of Community Health Centers (CHCs) and referral clinics across major provincial towns." data-kr="Infomation wey go help yu find Community Health Centers (CHCs) en referral hospitals na ol regional areas.">Information showing citizens the locations of Community Health Centers (CHCs) and referral clinics across major provincial towns.</p>
+
+            <h3>
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9zM13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                <span class="translatable" data-en="Disease Awareness Updates" data-kr="Epidemic Alerts">Disease Awareness Updates</span>
+            </h3>
+            <p class="translatable" data-en="Access to clear protocols to manage seasonal threats, including Cholera prevention, Lassa fever identification, and clean community routines." data-kr="Ples foh view protocols foh clear out risk na community, lek Cholera or Lassa fever.">Access to clear protocols to manage seasonal threats, including Cholera prevention, Lassa fever identification, and clean community routines.</p>
+
+            <div class="disclaimer-box">
+                <h4 class="translatable" data-en="Important Medical Disclaimer" data-kr="Notice foh Every Person">Important Medical Disclaimer</h4>
+                <p class="translatable" data-en="All details published here are for educational overview and are not direct medical advice. Consult a certified health professional for personalized care." data-kr="Information na dis site na foh learning purpose n0m0. Go to real hospital foh medical checking or treat.">All details published here are for educational overview and are not direct medical advice. Consult a certified health professional for personalized care.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>Welbodi na Gentri</strong> • Sierra Leone</p>
+        <p style="margin-top: 5px;" class="translatable" data-en="Keep our communities healthy and safe." data-kr="Keep we community safe en get gud health.">Keep our communities healthy and safe.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('show');
+        }
+
+        function applyLanguage(lang) {
+            const elements = document.querySelectorAll('.translatable');
+            const langBtnSpan = document.querySelector('#langBtn span');
+
+            elements.forEach(el => {
+                if (lang === 'kr' && el.dataset.kr) {
+                    el.textContent = el.dataset.kr;
+                } else if (lang === 'en' && el.dataset.en) {
+                    el.textContent = el.dataset.en;
+                }
+            });
+
+            if (langBtnSpan) {
+                langBtnSpan.textContent = (lang === 'en') ? 'Read na Krio' : 'Read na English';
+            }
+        }
+
+        function toggleLanguage() {
+            let currentLang = localStorage.getItem('welbodi_lang') || 'en';
+            let nextLang = (currentLang === 'en') ? 'kr' : 'en';
+            localStorage.setItem('welbodi_lang', nextLang);
+            applyLanguage(nextLang);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('welbodi_lang') || 'en';
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>

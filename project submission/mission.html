@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission - Welbodi na Gentri</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="emergency-banner">
+        <span class="alert-pulse"></span>
+        <span class="translatable" data-en="Emergency? Call Toll-Free:" data-kr="Emergency? Call Toll-Free:">Emergency? Call Toll-Free:</span>
+        <a href="tel:117">117</a>
+    </div>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-symbol">SL</div>
+                <div class="logo-text">
+                    <h1>Welbodi na Gentri</h1>
+                    <p>Health Information Hub</p>
+                </div>
+            </a>
+
+            <button class="menu-toggle" id="menuBtn" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="mission.html" class="nav-link active">Mission</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="lang-bar">
+            <button class="lang-btn" id="langBtn" onclick="toggleLanguage()">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 0c2.5 0 4.5 4.5 4.5 10S14.5 22 12 22 7.5 17.5 7.5 12 9.5 2 12 2zm-10 10h20"></path></svg>
+                <span>Read na Krio</span>
+            </button>
+        </div>
+
+        <section class="text-content">
+            <h2 class="translatable" data-en="Our Vision & Goals" data-kr="We Mission">Our Vision & Goals</h2>
+            <p class="translatable" data-en="Our mission is simple: to expand healthcare literacy and information access to every citizen of Sierra Leone." data-kr="We mission na foh spread health knowledge na simple word dem to everybody na Sierra Leone.">Our mission is simple: to expand healthcare literacy and information access to every citizen of Sierra Leone.</p>
+
+            <h3><span class="translatable" data-en="Eliminating Communication Barriers" data-kr="Pull Language Barrier">Eliminating Communication Barriers</span></h3>
+            <p class="translatable" data-en="We strive to provide simple, bilingual summaries of important medical guidelines so that language, reading barriers, or high data-costs do not stand in the way of safety." data-kr="We aim to deliver quick, light, and bilingual health info so data expense en vocabulary no block nobody foh protect deir self.">We strive to provide simple, bilingual summaries of important medical guidelines so that language, reading barriers, or high data-costs do not stand in the way of safety.</p>
+
+            <h3><span class="translatable" data-en="Supporting Local Infrastructure" data-kr="Supporting Local Infrastructure">Supporting Local Infrastructure</span></h3>
+            <p class="translatable" data-en="We support national health priorities set by the Ministry of Health by aligning our community-facing tips directly with national medical frameworks." data-kr="We program align foh support di main Ministry of Health activities and make sure say information reach ground floor level.">We support national health priorities set by the Ministry of Health by aligning our community-facing tips directly with national medical frameworks.</p>
+
+            <div class="disclaimer-box">
+                <h4 class="translatable" data-en="Community Impact" data-kr="Community Impact">Community Impact</h4>
+                <p class="translatable" data-en="By simplifying key health messages, we help families make safer choices and find the right services faster." data-kr="By simplifying key health messages, we help families make safer choices and find the right services faster.">By simplifying key health messages, we help families make safer choices and find the right services faster.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>Welbodi na Gentri</strong> • Sierra Leone</p>
+        <p style="margin-top: 5px;" class="translatable" data-en="Keep our communities healthy and safe." data-kr="Keep we community safe en get gud health.">Keep our communities healthy and safe.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('show');
+        }
+
+        function applyLanguage(lang) {
+            const elements = document.querySelectorAll('.translatable');
+            const langBtnSpan = document.querySelector('#langBtn span');
+
+            elements.forEach(el => {
+                if (lang === 'kr' && el.dataset.kr) {
+                    el.textContent = el.dataset.kr;
+                } else if (lang === 'en' && el.dataset.en) {
+                    el.textContent = el.dataset.en;
+                }
+            });
+
+            if (langBtnSpan) {
+                langBtnSpan.textContent = (lang === 'en') ? 'Read na Krio' : 'Read na English';
+            }
+        }
+
+        function toggleLanguage() {
+            let currentLang = localStorage.getItem('welbodi_lang') || 'en';
+            let nextLang = (currentLang === 'en') ? 'kr' : 'en';
+            localStorage.setItem('welbodi_lang', nextLang);
+            applyLanguage(nextLang);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('welbodi_lang') || 'en';
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>
